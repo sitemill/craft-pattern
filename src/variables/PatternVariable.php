@@ -23,40 +23,11 @@ class PatternVariable
     // =========================================================================
 
     /**
-     * @param int $version
-     * @return array
-     */
-    public function component($version = 1)
-    {
-        return [
-            'header' => '/v' . $version . '/components/header/index.twig'
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function layout($version)
-    {
-        return [
-            'helloWorld' => '_pattern/helloWorld',
-        ];
-    }
-
-    /**
      * @return array
      */
     public function theme()
     {
         return Pattern::$plugin->getSettings()->theme;
-    }
-
-    /**
-     * @return array
-     */
-    public function default()
-    {
-        return 'hi';
     }
 
 }
