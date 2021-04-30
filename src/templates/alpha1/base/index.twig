@@ -1,0 +1,24 @@
+{#Get the style from the theme using namespace#}
+{% set style = style|default(craft.pattern.theme[component.namespace]|default(null)) %}
+
+{#Convert namespace to kebab case for use in component#}
+{% set prefix = component.namespace|kebab %}
+
+{#Show blueprints on dev#}
+{% if craft.config.devMode and (craft.pattern.blueprint is defined and craft.pattern.blueprint) %}
+    {% include '_pattern/base/blueprint' %}
+{% endif %}
+
+{% block component %}
+    Component goes here.
+{% endblock %}
+
+{#Set up error reporting on dev#}
+{% if craft.config.devMode %}
+    {% if errors is defined %}
+        {% js %}
+            var errors = JSON.parse('{{ errors | json_encode | raw }}')
+            errors.forEach(element => console.error('[pattern] {{ component.namespace }}: ' + element))
+        {% endjs %}
+    {% endif %}
+{% endif %}

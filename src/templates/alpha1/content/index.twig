@@ -1,0 +1,41 @@
+{#---
+title: Content
+description: >
+    Houses the main page content.
+variables:
+    - name: contentMain
+      type: mixed
+      required: true
+    - name: contentSupporting
+      type: mixed
+examples:
+    - contentMain: >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget iaculis nisl, eu tristique arcu. Proin efficitur sodales enim. Morbi fermentum nisl non quam viverra, nec commodo est laoreet. Donec venenatis vitae risus in congue. Proin sollicitudin et elit vel malesuada. Pellentesque vitae nulla viverra, maximus turpis id, semper enim. Nullam vitae nulla et ex pretium dapibus. Duis ultricies nibh vel aliquam tempor. Proin accumsan ultricies turpis at aliquam. Duis ac sagittis leo.
+
+        Etiam ac orci neque. Phasellus vestibulum quam et ligula lobortis tempor. Ut faucibus risus nulla, sit amet interdum risus ultrices efficitur. Maecenas a dignissim quam. Ut in velit dictum, consectetur est quis, facilisis diam. Donec interdum luctus metus, sed vestibulum mi posuere eget. Aenean et interdum odio. Donec sem diam, ullamcorper nec dolor a, tristique porta ligula. Curabitur luctus ullamcorper eros at rhoncus. Vivamus eget sollicitudin urna.
+
+    contentSupporting: >
+      TODO
+---#}
+{% extends '_pattern/base' %}
+
+{% set component = {
+    'namespace': 'content'
+} %}
+
+{% set contentMain = contentMain|default(null) %}
+{% set contentSupporting = contentSupporting|default(null) %}
+
+{% block component %}
+    <div class="{{ prefix }} lg:flex" >
+        <div class="{{ prefix }}__main flex-grow">
+            {{ contentMain }}
+        </div>
+        {% if contentSupporting %}
+            <div class="{{ prefix }}__supporting lg:w-1/3 lg:ml-10">
+                {{ contentSupporting }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+

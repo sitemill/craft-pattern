@@ -1,0 +1,39 @@
+{#---
+title: Heading
+description: >
+    Renders a heading element.
+variables:
+    - name: title
+      type: string
+      required: true
+    - name: type
+      type: int
+examples:
+    - title: 'Get to the chopper'
+      type: 1
+    - title: 'Get your ass to mars'
+      type: 2
+    - title: 'Who is your daddy?'
+      type: 3
+    - title: 'And what does he do?'
+      type: 4
+---#}
+{% extends '_pattern/base' %}
+{% set type = type|default('1') %}
+
+{% set component = {
+    'namespace': 'heading/' ~ type
+} %}
+
+{% set title = title|default(null) %}
+
+{# Trim the h if set #}
+{% set type = type|trim('h') %}
+
+{% block component %}
+    <h{{ type }} class="{{ prefix }} {{ style ?? '' }}">{{ title }}</h{{ type }}>
+{% endblock %}
+
+{% if title == null %}
+    {% set errors = ["No title defined"] %}
+{% endif %}

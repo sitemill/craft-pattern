@@ -1,0 +1,28 @@
+{#---
+title: Spacer
+description: >
+    Space between things.
+variables:
+    - name: Size
+      type: string
+---#}
+{% extends '_pattern/base' %}
+
+{% set component = {
+    'namespace': 'spacer'
+} %}
+
+{% set size = size|default('md') %}
+
+{% switch size %}
+    {% case 'sm' %}
+        {% set height = 'h-6' %}
+    {% case 'md' %}
+        {% set height = 'h-10' %}
+    {% case 'lg' %}
+        {% set height = 'h-14' %}
+{% endswitch %}
+
+{% block component %}
+    <div class="{{ prefix }} {{ height }}"></div>
+{% endblock %}

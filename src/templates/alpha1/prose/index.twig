@@ -1,0 +1,32 @@
+{#---
+title: Prose
+description: >
+    Uses tailwind's `prose` class to make content flow better.
+variables:
+    - name: content
+      type: block
+      required: true
+examples:
+    - content: >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget iaculis nisl, eu tristique arcu. Proin efficitur sodales enim. Morbi fermentum nisl non quam viverra, nec commodo est laoreet. Donec venenatis vitae risus in congue. Proin sollicitudin et elit vel malesuada. Pellentesque vitae nulla viverra, maximus turpis id, semper enim. Nullam vitae nulla et ex pretium dapibus. Duis ultricies nibh vel aliquam tempor. Proin accumsan ultricies turpis at aliquam. Duis ac sagittis leo.
+
+        Etiam ac orci neque. Phasellus vestibulum quam et ligula lobortis tempor. Ut faucibus risus nulla, sit amet interdum risus ultrices efficitur. Maecenas a dignissim quam. Ut in velit dictum, consectetur est quis, facilisis diam. Donec interdum luctus metus, sed vestibulum mi posuere eget. Aenean et interdum odio. Donec sem diam, ullamcorper nec dolor a, tristique porta ligula. Curabitur luctus ullamcorper eros at rhoncus. Vivamus eget sollicitudin urna.
+---#}
+
+{% set component = {
+    'namespace': 'prose'
+} %}
+
+{% extends '_pattern/base' %}
+
+{% set content = content|default(null) %}
+
+{% block component %}
+    <div class="{{ prefix }} {{ style ?? '' }}">
+        {{ content }}
+    </div>
+{% endblock %}
+
+{% if content == null %}
+    {% set errors = ["No text defined"] %}
+{% endif %}

@@ -1,0 +1,31 @@
+{% set elements = [''] %}
+
+{% if component.elements is defined %}
+    {% set elements = elements|merge(component.elements) %}
+{% endif %}
+
+{% css %}
+    {% for element in elements %}
+    {% set fullClass = element == '' ? prefix : prefix ~ '__' ~ element %}
+    .{{ fullClass }}:hover {
+    border:1px solid blue;
+    position:relative;
+    }
+    .{{ fullClass }}:hover:after {
+    color:white;
+    font-size: 10px;
+    padding:0;
+    line-height:150%;
+    font-weight: normal;
+    background: blue;
+    position:absolute;
+    top:0;
+    {% if element == '' %}
+        left:0;
+    {% else %}
+        right:0;
+    {% endif %}
+       content: '{{ fullClass }}'
+    }
+{% endfor %}
+{% endcss %}

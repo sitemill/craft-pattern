@@ -1,0 +1,95 @@
+{#---
+title: Site Header
+description: >
+    Renders a horizontal site header, by default it includes a `_pattern/navigation/horizontal` nav which you can pass settings to via the `navSettings` variable:
+
+        {% include '_pattern/siteHeader' with {
+            navItems: craft.entries.section('pages').all()
+        } %}
+
+    Or a custom array:
+
+        {% include '_pattern/siteHeader' with {
+            navItems:{
+                {title: 'Home', url: '/'},
+                {title: 'About', url: '/about'},
+            }
+        } %}
+
+    Optionally if you need to customise the navigation you can use an embed, and ovverride the `navigation` block.
+
+        {% embed '_pattern/siteHeader' %}
+            {% block navigation %}
+                Your navigation
+            {% endblock %}
+        {% endembed %}
+
+variables:
+    - name: siteName
+      type: string
+      default: siteName
+      description: The name of the site to display in the site's header, uses Craft's global `siteName` variable unless overridden.
+    - name: siteUrl
+      type: string
+      default: siteUrl
+      description: The link to be wrapper around the site name, defaults to Craft's global `siteUrl`. Set to `null` to disable link.
+    - name: logoUrl
+      type: string
+      description: Url of an image you want to use in place of the site's title.
+    - name: navItems
+      type: array
+      description: An entry query, or custom arrary of items. Each requires a `title` and `url`.
+examples:
+    siteName: Sitemill.
+    siteUrl: https://sitemill.co
+    navItems:
+        items:
+            - title: Home
+              url: /
+              children:
+                - title: Child
+                  url: url
+            - title: About
+              url: /about/
+---#}
+{% extends '_pattern/base' %}
+
+{% set component = {
+    'namespace': 'siteHeader',
+    'elements': ['brand','nav']
+} %}
+
+{% set siteName = siteName %}
+{% set siteUrl = siteUrl %}
+{% set logoUrl = logoUrl|default(null) %}
+{% set navItems = navItems| default(null) %}
+
+{% block component %}
+
+    <div class="{{ prefix }} {{ style.main ?? '' }}">
+
+        <div class="{{ prefix }}__brand {{ style.brand ?? '' }}">
+            {% block title %}
+                <a href="{{ siteUrl }}" aria-label="{{ siteName }}" title="Goto the {{ siteName }} homepage">
+                    {% if logoUrl %}
+                        <img src="{{ logoUrl }}" alt="{{ siteName }}" class="brand">
+                    {% else %}
+                        {{ siteName }}
+                    {% endif %}
+                </a>
+            {% endblock %}
+        </div>
+
+        <div class="{{ prefix }}__nav {{ style.nav ?? '' }}">
+            {% block navigation %}
+                {% if navItems %}
+                    {% include '_pattern/navigation/horizontal' with {
+                        items: navItems
+                    } %}
+                {% endif %}
+            {% endblock %}
+        </div>
+
+    </div>
+
+{% endblock %}

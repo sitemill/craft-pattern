@@ -1,0 +1,48 @@
+{#---
+title: Button
+description: >
+    Pretty self-explanitory isn't it?
+variables:
+    - name: text
+      type: string
+      description: The text to be displayed on the button
+    - name: title
+      type: string
+      description: A descriptive title tag
+      required: true
+    - name: url
+      type: string
+      description: The destination URL
+    - name: target
+      type: string
+      description: Where the link will open, `_blank` for a new tab
+    - name: icon
+      type: string
+      description: TODO
+examples:
+    - TODO
+---#}
+
+{% set component = {
+    'namespace': 'button'
+} %}
+
+{% extends '_pattern/base' %}
+
+{% set text = text|default(null) %}
+{% set title = title|default(null) %}
+{% set url = url|default(null) %}
+{% set target = target|default(null) %}
+{% set icon = icon|default(null) %}
+
+{% block component %}
+    <a class="{{ prefix }} {{ style ?? 'inline-block no-underline py-3 px-5 bg-gray-100' }}" href="{{ url }}">
+        {{ text }}
+    </a>
+{% endblock %}
+
+{#{% if content == null %}#}
+{#    {% set errors = ["No text defined"] %}#}
+{#{% endif %}#}
+
+{# TODO: Think about color schemes for different button roles, do I have a color #}

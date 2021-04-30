@@ -1,0 +1,46 @@
+{#---
+title: Horizontal Navigation
+variables:
+    - name: items
+      type: array
+      required: true
+      description: An entry query or custom array, each including at least a title and url.
+examples:
+    items:
+        - title: Home
+          url: /
+        - title: About
+          url: /about/
+---#}
+
+{% set component = {
+    'namespace': 'navigation/horizontal'
+} %}
+
+{% extends '_pattern/base' %}
+
+{% set items = items|default(null) %}
+
+{% block component %}
+    {% if items|length %}
+        <div class="{{ prefix }} ">
+            <a href="#">Toggle nav</a>
+            <ul>
+                {% for item in items %}
+                    <li>
+                        {% if item.url is defined %}
+                            <a href="{{ item.url }}" title="Go to">
+                                {{ item.title }}
+                            </a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% set errors = [] %}
+{% if items == null %}
+    {% set errors = errors|merge(["No items defined"]) %}
+{% endif %}
