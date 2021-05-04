@@ -30,8 +30,17 @@ examples:
 {# Trim the h if set #}
 {% set type = type|trim('h') %}
 
+{% set defaultStyle = {
+    '1': 'font-bold text-3xl mb-4',
+    '2': 'font-bold text-2xl mb-4',
+    '3': 'font-bold text-lg mb-4',
+    '4': 'font-bold',
+    '5': 'font-bold',
+    '6': 'font-bold',
+} %}
+
 {% block component %}
-    <h{{ type }} class="{{ prefix }} {{ style ?? '' }}">{{ title }}</h{{ type }}>
+    <h{{ type }} class="{{ prefix }} {{ style ?? defaultStyle[type] }}">{{ title }}</h{{ type }}>
 {% endblock %}
 
 {% if title == null %}

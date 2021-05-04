@@ -16,13 +16,13 @@ variables:
 
 {% switch size %}
     {% case 'sm' %}
-        {% set height = 'h-6' %}
+        {% set defaultStyle = 'h-6' %}
     {% case 'md' %}
-        {% set height = 'h-10' %}
+        {% set defaultStyle = 'h-10' %}
     {% case 'lg' %}
-        {% set height = 'h-14' %}
+        {% set defaultStyle = 'h-14' %}
 {% endswitch %}
 
 {% block component %}
-    <div class="{{ prefix }} {{ height }}"></div>
+    <div class="{{ prefix }} {{ style ?? defaultStyle }}"></div>
 {% endblock %}

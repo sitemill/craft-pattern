@@ -30,10 +30,21 @@ class Settings extends Model
      */
     public $blueprint = 'true';
 
+
     /**
      * @var array
      */
     public $theme = [
+        'colors' => [
+            'primary' => [
+                'border' => 'border-red-100',
+                'background' => 'bg-red-100',
+                'text' => 'text-red-100'
+            ],
+            'secondary' => [
+
+            ]
+        ],
         'heading/1' => 'font-bold text-2xl',
         'heading/2' => 'font-bold text-xl',
         'heading/3' => 'font-bold text-lg',
@@ -48,7 +59,8 @@ class Settings extends Model
         'navigation/horizontal' => [
             'main' => 'bg-red-500'
         ],
-        'richText' => 'prose'
+        'richText' => 'prose',
+
     ];
 
 //    // Public Methods

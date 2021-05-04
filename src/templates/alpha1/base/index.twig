@@ -1,5 +1,10 @@
-{#Get the style from the theme using namespace#}
+{#Check if style has been ovveridden, otherwise get style from the theme using namespace#}
 {% set style = style|default(craft.pattern.theme[component.namespace]|default(null)) %}
+
+{#Check if style has been ovveridden, otherwise get style from the theme using namespace#}
+{% if role is defined %}
+    {% set colors = colors|default(craft.pattern.theme['colors'][role]|default(null)) %}
+{% endif %}
 
 {#Convert namespace to kebab case for use in component#}
 {% set prefix = component.namespace|kebab %}
@@ -22,3 +27,5 @@
         {% endjs %}
     {% endif %}
 {% endif %}
+
+{#TODO: set warnings for things eg. title required for accessibility #}

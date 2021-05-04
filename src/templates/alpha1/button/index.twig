@@ -34,9 +34,10 @@ examples:
 {% set url = url|default(null) %}
 {% set target = target|default(null) %}
 {% set icon = icon|default(null) %}
+{% set role = role|default('primary') %}
 
 {% block component %}
-    <a class="{{ prefix }} {{ style ?? 'inline-block no-underline py-3 px-5 bg-gray-100' }}" href="{{ url }}">
+    <a class="{{ prefix }} {{ style ?? 'inline-block no-underline py-3 px-5' }} {{ colors ? colors.background : 'bg-gray-100' }}" href="{{ url }}">
         {{ text }}
     </a>
 {% endblock %}
@@ -45,4 +46,3 @@ examples:
 {#    {% set errors = ["No text defined"] %}#}
 {#{% endif %}#}
 
-{# TODO: Think about color schemes for different button roles, do I have a color #}
